@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
-.vs/
+#.vs/
 Debug/
 Log.txt
+*.ipch
