@@ -37,16 +37,18 @@ void GameStart::update() {
 }
 
 void GameStart::draw(int i) {
+	
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 140);
 	if (i % 2 == 0)
 	{
-		SetDrawBright(0, 200, 0);
+		SetDrawBright(0, 100, 100);
 		DrawRotaGraph(pos_x, pos_y, size, 0, graphic, true);
 	} else if (i % 2 == 1)
 	{
 		//SetDrawBright(200, 0, 200);
 		DrawRotaGraph(pos_x, pos_y, size, 0, graphic, true);
 	}
-
+	SetDrawBright(255, 255, 255);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, NULL);
 }
 

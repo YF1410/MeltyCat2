@@ -76,6 +76,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		name_move[i] = 0;
 		name_flag[i] = 0;
 	}
+	//
+
+	//ステージ選択
+	int stage_num = 1;//
 	
 	/*Player*/
 	enum Cat { SOLID/*固体*/, LIQUID/*液体*/ };
@@ -90,6 +94,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	/*Cursor*/
 	Cursor* cursor = new Cursor(0, 0, 32, 0, 0, LU);
 
+
+	//あとで消す
 	/*MapChip*/
 	int map[12][15] = {
 	{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
@@ -106,6 +112,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
 	};
 
+	//
+	
 	// 最新のキーボード情報用
 	char keys[256] = { 0 };
 	int click = 0;
@@ -135,6 +143,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//スタート画面
 		if (scene == 0)
 		{
+			//初期化
 			if (frame == 1)
 			{
 				for (int i = 0; i < staet_particle_num; i++)
@@ -155,6 +164,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 				}
 			}
 
+			//文字移動
 			for (int i = 0; i < 8; i++)
 			{
 				if (name_flag[i] == 1)
@@ -167,17 +177,25 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 					name_flag[i] = 2;
 				}
 			}
-			
+
+			//particle処理
 			for (int i = 0; i < staet_particle_num; i++)
 			{
 				gamestart[i].update();
 			}
+
+			//次に行く
 			if (keys[KEY_INPUT_SPACE] == true)
 			{
 				scene = 1;
 			}
 		}
 
+		if (scene == 1)
+		{
+
+		}
+		
 		if (scene == 2)
 		{
 			player->Update(edgeL, WIN_WIDTH, WIN_HEIGHT, block, item);
