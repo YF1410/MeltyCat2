@@ -4,6 +4,8 @@
 #include "Item.h"
 #include "Cursor.h"
 
+#include "GameStart.h"
+
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "MeltyCat";
 
@@ -40,9 +42,41 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// 画像などのリソースデータの変数宣言と読み込み
-
+	int buck = LoadGraph("graphic/buckground.png");//start背景
+	int game_name[8];//ゲーム名
+	LoadDivGraph("graphic/MeltyCat.png", 8, 8, 1, 64, 64, game_name);
 
 	// ゲームループで使う変数の宣言
+	int frame = 0;
+
+	int scene = 0;
+	
+	//startで使用する
+	int buck_pos_x = 0,buck_pos_y = 0;//背景座標
+
+	//背景のパーティクル
+	const int staet_particle_num = 200;
+	GameStart gamestart[staet_particle_num];
+
+	//ゲーム名移動
+	float name_x[8], name_y[8];
+	int name_flag[8];
+	int name_count = 0;
+	float name_move[8];
+	for (int i = 0; i < 8; i++)
+	{
+		if (i < 5)
+		{
+			name_x[i] = 200 + i * 100;
+		} else
+		{
+			name_x[i] = 350 + i * 100;
+		}
+		name_y[i] = -70;
+		name_move[i] = 0;
+		name_flag[i] = 0;
+	}
+	
 	/*Player*/
 	enum Cat { SOLID/*固体*/, LIQUID/*液体*/ };
 	Player* player = new Player(800, 352, 32, 2, 0, SOLID);
@@ -96,27 +130,95 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		player->Update(edgeL, WIN_WIDTH, WIN_HEIGHT, block, item);
-		block->Update();
-		item->Update();
-		cursor->Update(edgeL, keys, oldkeys, click, oldclick, block, WIN_WIDTH, WIN_HEIGHT);
+		frame++;
 
-		// 描画処理
-		/*PlaeArea*/
-		DrawBox(edgeL, 0, WIN_WIDTH, WIN_HEIGHT, GetColor(255, 192, 192), true);
-		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 12; j++) {
-				DrawBox(i * 64 + edgeL, j * 64, (i + 1) * 64 + edgeL, (j + 1) * 64, GetColor(255, 255, 255), false);
+		//スタート画面
+		if (scene == 0)
+		{
+			if (frame == 1)
+			{
+				for (int i = 0; i < staet_particle_num; i++)
+				{
+					gamestart[i].start(i);
+				}
+			}
+
+			//題名
+			if (frame % 30 == 1 && name_y[name_count] < -60 && name_flag[name_count] == 0)
+			{
+				name_flag[name_count] = 1;
+				name_move[name_count] = 10;
+				name_count++;
+				if (name_count == 8)
+				{
+					name_count = 0;
+				}
+			}
+
+			for (int i = 0; i < 8; i++)
+			{
+				if (name_flag[i] == 1)
+				{
+					name_move[i] = name_move[i] * 1.09;
+				}
+
+				if (name_y[i] + name_move[i] > 330)
+				{
+					name_flag[i] = 2;
+				}
+			}
+			
+			for (int i = 0; i < staet_particle_num; i++)
+			{
+				gamestart[i].update();
+			}
+			if (keys[KEY_INPUT_SPACE] == true)
+			{
+				scene = 1;
 			}
 		}
 
-		cursor->Draw(edgeL, WIN_WIDTH, WIN_HEIGHT);
-		block->Draw();
-		item->Draw();
-		player->Draw();
+		if (scene == 2)
+		{
+			player->Update(edgeL, WIN_WIDTH, WIN_HEIGHT, block, item);
+			block->Update();
+			item->Update();
+			cursor->Update(edgeL, keys, oldkeys, click, oldclick, block, WIN_WIDTH, WIN_HEIGHT);
+		}
+		
+		// 描画処理
+		if (scene == 0)
+		{
+			//背景
+			DrawGraph(buck_pos_x, buck_pos_y, buck, true);
+			//パーティクル
+			for (int i = 0; i < staet_particle_num; i++)
+			{
+				gamestart[i].draw(i);
+			}
+			//ゲーム名
+			for (int i = 0; i < 8; i++)
+			{
+				DrawRotaGraph(name_x[i], name_y[i] + name_move[i], 1.6, 0, game_name[i], true);
+			}
+		}
 
+		/*PlaeArea*/
+		if (scene == 2)
+		{
+			DrawBox(edgeL, 0, WIN_WIDTH, WIN_HEIGHT, GetColor(255, 192, 192), true);
+			for (int i = 0; i < 15; i++) {
+				for (int j = 0; j < 12; j++) {
+					DrawBox(i * 64 + edgeL, j * 64, (i + 1) * 64 + edgeL, (j + 1) * 64, GetColor(255, 255, 255), false);
+				}
+			}
+			cursor->Draw(edgeL, WIN_WIDTH, WIN_HEIGHT);
+			block->Draw();
+			item->Draw();
+			player->Draw();
+		}
 		/*デバッグコード*/
-//		DrawFormatString(0, 0, GetColor(255, 255, 255), "");
+		DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", name_y[0] + name_move[0]);
 
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
