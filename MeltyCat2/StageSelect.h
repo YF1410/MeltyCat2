@@ -16,7 +16,12 @@ public:
 	StageSelect();
 	~StageSelect() {};
 
-	void update(char A, char D,char space);
+	void update(char A, char D);
 	void draw();
+
+	int getnumber()
+	{
+		return number;
+	}
 };
 

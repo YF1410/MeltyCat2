@@ -79,7 +79,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	//
 
 	//ステージ選択
-	int stage_num = 1;//
+	char key_A = false, key_D = false;
 	
 	/*Player*/
 	enum Cat { SOLID/*固体*/, LIQUID/*液体*/ };
@@ -191,9 +191,31 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			}
 		}
 
+		//ステージ選択
 		if (scene == 1)
 		{
-
+			//Aキーの処理
+			if (keys[KEY_INPUT_A] == 1 && oldkeys[KEY_INPUT_A] == 0)
+			{
+				key_A = true;
+			}
+			else
+			{
+				key_A = false;
+			}
+			//Dキーの処理
+			if (keys[KEY_INPUT_D] == 1 && oldkeys[KEY_INPUT_D] == 0)
+			{
+				key_D = true;
+			}
+			else
+			{
+				key_D = false;
+			}
+			if (keys[KEY_INPUT_SPACE] == 1)
+			{
+				scene = 1;
+			}
 		}
 		
 		if (scene == 2)

@@ -3,7 +3,7 @@
 StageSelect::StageSelect() {
 	LoadDivGraph("graphic/key.png", 2, 2, 1,
 		64, 64, key_graphic);
-	number = 0;
+	number = 1;
 	pos_x[0] = 40;
 	pos_y[0] = 350;
 	pos_x[1] = 1166;
@@ -12,10 +12,10 @@ StageSelect::StageSelect() {
 	buckground_y[5];
 }
 
-void StageSelect::update(char A, char D,char space) {
+void StageSelect::update(char A, char D) {
 	if (A == true)
 	{
-		if (number > 0)
+		if (number > 1)
 		{
 			number--;
 		}
