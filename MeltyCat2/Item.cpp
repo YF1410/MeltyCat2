@@ -9,18 +9,18 @@ Item::Item(int x, int y, int r, int put) {
 }
 Item::~Item() {}
 
-void Item::Update() {}
+void Item::update() {}
 
-void Item::Draw() {
+void Item::draw() {
 	if (put == 1) {
 		DrawCircle(x, y, r, GetColor(112, 112, 255), true);
 	}
 }
 
-int Item::GetX() { return x; }
-int Item::GetY() { return y; }
-int Item::GetPut() { return put; }
+int Item::getX() { return x; }
+int Item::getY() { return y; }
+int Item::getPut() { return put; }
 
-void Item::SetX(int x) { this->x = x; }
-void Item::SetY(int y) { this->y = y; }
-void Item::SetPut(int put) { this->put = put; }
+void Item::setX(int x) { this->x = x; }
+void Item::setY(int y) { this->y = y; }
+void Item::setPut(int put) { this->put = put; }

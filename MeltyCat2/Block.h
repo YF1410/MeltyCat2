@@ -7,17 +7,17 @@ public:
 	Block(int x, int y, int r, int put, int vector);
 	~Block();
 
-	void Update();
-	void Draw();
+	void update();
+	void draw();
 
-	int GetX();
-	int GetY();
-	int GetPut();
-	int GetVector();
+	int getX();
+	int getY();
+	int getPut();
+	int getVector();
 
-	void SetX(int x);
-	void SetY(int y);
-	void SetPut(int put);
-	void SetVector(int vector);
+	void setX(int x);
+	void setY(int y);
+	void setPut(int put);
+	void setVector(int vector);
 };
 

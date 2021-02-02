@@ -7,15 +7,15 @@ public:
 	Item(int x, int y, int r, int put);
 	~Item();
 
-	void Update();
-	void Draw();
+	void update();
+	void draw();
 
-	int GetX();
-	int GetY();
-	int GetPut();
+	int getX();
+	int getY();
+	int getPut();
 
-	void SetX(int x);
-	void SetY(int y);
-	void SetPut(int put);
+	void setX(int x);
+	void setY(int y);
+	void setPut(int put);
 };
 

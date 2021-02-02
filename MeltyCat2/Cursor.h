@@ -8,25 +8,25 @@ public:
 	Cursor(int x, int y, int r, int putX, int putY, int vector);
 	~Cursor();
 
-	void Update(int edgeL,
+	void update(int edgeL,
 		char* keys, char* oldkeys,
 		int click, int oldclick, Block* block,
 		int WIN_WIDTH, int WIN_HEIGHT);
-	void Drag(int edgeL);
-	void Spin(char* keys, char* oldkeys);
-	void Put(int click, int oldclick, Block* block);
-	void Draw(int edgeL, int WIN_WIDTH, int WIN_HEIGHT);
+	void drag(int edgeL);
+	void spin(char* keys, char* oldkeys);
+	void put(int click, int oldclick, Block* block);
+	void draw(int edgeL, int WIN_WIDTH, int WIN_HEIGHT);
 
-	int GetX();
-	int GetY();
-	int GetPutX();
-	int GetPutY();
-	int GetVector();
+	int getX();
+	int getY();
+	int getPutX();
+	int getPutY();
+	int getVector();
 
-	void SetX(int x);
-	void SetY(int y);
-	void SetPutX(int putX);
-	void SetPutY(int putY);
-	void SetVector(int Vector);
+	void setX(int x);
+	void setY(int y);
+	void setPutX(int putX);
+	void setPutY(int putY);
+	void setVector(int Vector);
 };
 

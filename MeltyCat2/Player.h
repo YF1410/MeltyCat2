@@ -1,5 +1,6 @@
 #pragma once
 #include "Block.h"
+#include "Goal.h"
 #include "Item.h"
 #include "Object.h"
 class Player : public Object {
@@ -9,23 +10,24 @@ public:
 	Player(int x, int y, int r, int moveX, int moveY, int state);
 	~Player();
 
-	void Update(int edgeL, int WIN_WIDTH, int WIN_HEIGHT, Block* block, Item* item);
-	void Move(int edgeL, int WIN_WIDTH, int WIN_HEIGHT);
-	void Turn(Block* block);
-	void Switch(Item* item, int edgeL);
-	void Draw();
+	void update(int edgeL, int WIN_WIDTH, int WIN_HEIGHT, Block* block, Item* item);
+	void move(int edgeL, int WIN_WIDTH, int WIN_HEIGHT);
+	void arrive(Goal* goal, int edgeL, Player* player);
+	void turn(Block* block);
+	void change(Item* item, int edgeL);
+	void draw();
 
-	int GetX();
-	int GetY();
-	int GetR();
-	int GetMoveX();
-	int GetMoveY();
-	int GetState();
+	int getX();
+	int getY();
+	int getR();
+	int getMoveX();
+	int getMoveY();
+	int getState();
 
-	void SetX(int x);
-	void SetY(int y);
-	void SetR(int r);
-	void SetMoveX(int moveX);
-	void SetMoveY(int moveY);
-	void SetState(int state);
+	void setX(int x);
+	void setY(int y);
+	void setR(int r);
+	void setMoveX(int moveX);
+	void setMoveY(int moveY);
+	void setState(int state);
 };
