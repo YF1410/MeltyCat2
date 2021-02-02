@@ -12,13 +12,13 @@ Player::Player(int x, int y, int r, int moveX, int moveY, int state) {
 }
 Player::~Player() {}
 
-void Player::Update(int edgeL, int WIN_WIDTH, int WIN_HEIGHT, Block* block, Item* item) {
-	Move(edgeL, WIN_WIDTH, WIN_HEIGHT);
-	Turn(block);
-	Switch(item, edgeL);
+void Player::update(int edgeL, int WIN_WIDTH, int WIN_HEIGHT, Block* block, Item* item) {
+	move(edgeL, WIN_WIDTH, WIN_HEIGHT);
+	turn(block);
+	change(item, edgeL);
 }
 
-void Player::Move(int edgeL, int WIN_WIDTH, int WIN_HEIGHT) {
+void Player::move(int edgeL, int WIN_WIDTH, int WIN_HEIGHT) {
 	x += moveX;
 	y += moveY;
 	if (x < edgeL + r || x > WIN_WIDTH - r) {
@@ -29,45 +29,52 @@ void Player::Move(int edgeL, int WIN_WIDTH, int WIN_HEIGHT) {
 	}
 }
 
-void Player::Turn(Block* block) {/*LU=0,LD=1,RD=2,RU=3*/
-	if (x == block->GetX() && y == block->GetY() && moveX > 0) {
-		if (block->GetVector() == 0) {
+void Player::arrive(Goal* goal, int edgeL, Player* player) {
+	if ((x - edgeL) / 64 == (goal->getX() - edgeL) / 64 && y / 64 == goal->getY() / 64) {
+		delete player;
+//		Player()
+	}
+}
+
+void Player::turn(Block* block) {/*LU=0,LD=1,RD=2,RU=3*/
+	if (x == block->getX() && y == block->getY() && moveX > 0) {
+		if (block->getVector() == 0) {
 			moveX = 0;
 			moveY = -2;
-		} else if (block->GetVector() == 1) {
+		} else if (block->getVector() == 1) {
 			moveX = 0;
 			moveY = 2;
 		}
-	} else if (x == block->GetX() && y == block->GetY() && moveX < 0) {
-		if (block->GetVector() == 3) {
+	} else if (x == block->getX() && y == block->getY() && moveX < 0) {
+		if (block->getVector() == 3) {
 			moveX = 0;
 			moveY = -2;
-		} else if (block->GetVector() == 2) {
+		} else if (block->getVector() == 2) {
 			moveX = 0;
 			moveY = 2;
 		}
-	} else if (x == block->GetX() && y == block->GetY() && moveY > 0) {
-		if (block->GetVector() == 0) {
+	} else if (x == block->getX() && y == block->getY() && moveY > 0) {
+		if (block->getVector() == 0) {
 			moveX = -2;
 			moveY = 0;
-		} else if (block->GetVector() == 3) {
+		} else if (block->getVector() == 3) {
 			moveX = 2;
 			moveY = 0;
 		}
-	} else if (x == block->GetX() && y == block->GetY() && moveY < 0) {
-		if (block->GetVector() == 1) {
+	} else if (x == block->getX() && y == block->getY() && moveY < 0) {
+		if (block->getVector() == 1) {
 			moveX = -2;
 			moveY = 0;
-		} else if (block->GetVector() == 2) {
+		} else if (block->getVector() == 2) {
 			moveX = 2;
 			moveY = 0;
 		}
 	}
 }
 
-void Player::Switch(Item* item, int edgeL) {
-	if (item->GetPut() == 1 && (x - edgeL) / 64 == (item->GetX() - edgeL) / 64 && y / 64 == item->GetY() / 64) {
-		item->SetPut(0);
+void Player::change(Item* item, int edgeL) {
+	if (item->getPut() == 1 && (x - edgeL) / 64 == (item->getX() - edgeL) / 64 && y / 64 == item->getY() / 64) {
+		item->setPut(0);
 		state++;
 		if (state > 1/*LIQUID*/) {
 			state = 0/*SOLID*/;
@@ -75,7 +82,7 @@ void Player::Switch(Item* item, int edgeL) {
 	}
 }
 
-void Player::Draw() {
+void Player::draw() {
 	if (state == 0/*SOLID*/) {
 		DrawCircle(x, y, r, GetColor(255, 255, 128), true);
 	} else if (state == 1/*LIQUID*/) {
@@ -83,16 +90,16 @@ void Player::Draw() {
 	}
 }
 
-int Player::GetX() { return x; }
-int Player::GetY() { return y; }
-int Player::GetR() { return r; }
-int Player::GetMoveX() { return moveX; }
-int Player::GetMoveY() { return moveY; }
-int Player::GetState() { return state; }
+int Player::getX() { return x; }
+int Player::getY() { return y; }
+int Player::getR() { return r; }
+int Player::getMoveX() { return moveX; }
+int Player::getMoveY() { return moveY; }
+int Player::getState() { return state; }
 
-void Player::SetX(int x) { this->x = x; }
-void Player::SetY(int y) { this->y = y; }
-void Player::SetR(int r) { this->r = r; }
-void Player::SetMoveX(int moveX) { this->moveX = moveX; }
-void Player::SetMoveY(int moveY) { this->moveY = moveY; }
-void Player::SetState(int state) { this->state = state; }
+void Player::setX(int x) { this->x = x; }
+void Player::setY(int y) { this->y = y; }
+void Player::setR(int r) { this->r = r; }
+void Player::setMoveX(int moveX) { this->moveX = moveX; }
+void Player::setMoveY(int moveY) { this->moveY = moveY; }
+void Player::setState(int state) { this->state = state; }

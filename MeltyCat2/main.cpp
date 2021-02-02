@@ -220,10 +220,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		
 		if (scene == 2)
 		{
-			player->Update(edgeL, WIN_WIDTH, WIN_HEIGHT, block, item);
-			block->Update();
-			item->Update();
-			cursor->Update(edgeL, keys, oldkeys, click, oldclick, block, WIN_WIDTH, WIN_HEIGHT);
+			player->update(edgeL, WIN_WIDTH, WIN_HEIGHT, block, item);
+			block->update();
+			item->update();
+			cursor->update(edgeL, keys, oldkeys, click, oldclick, block, WIN_WIDTH, WIN_HEIGHT);
 		}
 		
 		// 描画処理
@@ -252,10 +252,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 					DrawBox(i * 64 + edgeL, j * 64, (i + 1) * 64 + edgeL, (j + 1) * 64, GetColor(255, 255, 255), false);
 				}
 			}
-			cursor->Draw(edgeL, WIN_WIDTH, WIN_HEIGHT);
-			block->Draw();
-			item->Draw();
-			player->Draw();
+			cursor->draw(edgeL, WIN_WIDTH, WIN_HEIGHT);
+			block->draw();
+			item->draw();
+			player->draw();
 		}
 		/*デバッグコード*/
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", name_y[0] + name_move[0]);

@@ -1,21 +1,20 @@
 #pragma once
 #include "Object.h"
-class Item : public Object {
+class Goal : public Object {
 private:
 
 public:
-	Item(int x, int y, int r, int put);
-	~Item();
+	Goal(int x, int y, int r);
+	~Goal();
 
 	void update();
 	void draw();
 
 	int getX();
 	int getY();
-	int getPut();
+	int getR();
 
 	void setX(int x);
 	void setY(int y);
-	void setPut(int put);
+	void setR(int r);
 };
-
