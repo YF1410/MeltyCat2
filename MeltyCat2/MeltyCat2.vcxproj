@@ -130,6 +130,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="GameStart.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="GameStart.h" />
+    <ClInclude Include="Goal.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />

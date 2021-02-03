@@ -185,7 +185,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			}
 
 			//éüÇ…çsÇ≠
-			if (keys[KEY_INPUT_SPACE] == true)
+			if (keys[KEY_INPUT_SPACE] == true && oldkeys[KEY_INPUT_SPACE] == false)
 			{
 				scene = 1;
 			}
@@ -212,9 +212,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			{
 				key_D = false;
 			}
-			if (keys[KEY_INPUT_SPACE] == 1)
+			if (keys[KEY_INPUT_SPACE] == true && oldkeys[KEY_INPUT_SPACE] == false)
 			{
-				scene = 1;
+				scene = 2;
 			}
 		}
 		
