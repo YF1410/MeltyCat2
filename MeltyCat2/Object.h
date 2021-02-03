@@ -1,7 +1,7 @@
 #pragma once
 class Object {
 protected:
-	int x, y, r, put;
+	int graphic, x, y, r, put;
 public:
 
 };
