@@ -2,6 +2,7 @@
 #include "Block.h"
 
 Block::Block(int x, int y, int r, int put, int vector) {
+	this->graphic = LoadGraph("graphic/SetBlock.png");
 	this->x = x;
 	this->y = y;
 	this->r = r;
@@ -14,23 +15,7 @@ void Block::update() {}
 
 void Block::draw() {
 	if (put == 1) {/*LU=0,LD=1,RD=2,RU=3*/
-		switch (vector) {
-		case 0:
-			DrawTriangle(x - r, y + r, x + r, y - r, x + r, y + r, GetColor(192, 255, 192), true);
-			break;
-
-		case 1:
-			DrawTriangle(x - r, y - r, x + r, y + r, x + r, y - r, GetColor(192, 255, 192), true);
-			break;
-
-		case 2:
-			DrawTriangle(x + r, y - r, x - r, y + r, x - r, y - r, GetColor(192, 255, 192), true);
-			break;
-
-		case 3:
-			DrawTriangle(x + r, y + r, x - r, y - r, x - r, y + r, GetColor(192, 255, 192), true);
-			break;
-		}
+		DrawRectRotaGraph(x, y, 64, 0, 64, 64, 1.0, -3.1415 / 2 * vector, graphic, true);
 	}
 }
 

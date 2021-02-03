@@ -2,6 +2,7 @@
 #include "Cursor.h"
 
 Cursor::Cursor(int x, int y, int r, int putX, int putY, int vector) {
+	this->graphic = LoadGraph("graphic/SetBlock.png");
 	this->x = x;
 	this->y = y;
 	this->r = r;
@@ -47,24 +48,8 @@ void Cursor::put(int click, int oldclick, Block* block) {
 void Cursor::draw(int edgeL, int WIN_WIDTH, int WIN_HEIGHT) {
 	if (x >= edgeL && x <= WIN_WIDTH && y >= 0 && y <= WIN_HEIGHT) {
 		DrawBox(putX - 32, putY - 32, putX + 32, putY + 32, GetColor(255, 255, 0), false);
-	}
-	switch (vector) {/*LU=0,LD=1,RD=2,RU=3*/
-	case 0:
-		DrawTriangle(x - r, y + r, x + r, y - r, x + r, y + r, GetColor(192, 255, 192), true);
-		break;
-
-	case 1:
-		DrawTriangle(x - r, y - r, x + r, y + r, x + r, y - r, GetColor(192, 255, 192), true);
-		break;
-
-	case 2:
-		DrawTriangle(x + r, y - r, x - r, y + r, x - r, y - r, GetColor(192, 255, 192), true);
-		break;
-
-	case 3:
-		DrawTriangle(x + r, y + r, x - r, y - r, x - r, y + r, GetColor(192, 255, 192), true);
-		break;
-	}
+	}/*LU=0,LD=1,RD=2,RU=3*/
+	DrawRectRotaGraph(x, y, 64, 0, 64, 64, 1.0, -3.1415 / 2 * vector, graphic, true);
 }
 
 int Cursor::getX() { return x; }

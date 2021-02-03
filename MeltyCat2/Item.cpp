@@ -2,6 +2,7 @@
 #include "Item.h"
 
 Item::Item(int x, int y, int r, int put) {
+	this->graphic = LoadGraph("graphic/SetBlock.png");
 	this->x = x;
 	this->y = y;
 	this->r = r;
@@ -13,7 +14,7 @@ void Item::update() {}
 
 void Item::draw() {
 	if (put == 1) {
-		DrawCircle(x, y, r, GetColor(112, 112, 255), true);
+		DrawRectGraph(x - 32, y - 32, 0, 0, 64, 64, graphic, true);
 	}
 }
 
