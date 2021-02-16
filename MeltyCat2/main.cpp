@@ -5,6 +5,7 @@
 #include "Cursor.h"
 
 #include "GameStart.h"
+#include "StageSelect.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "MeltyCat";
@@ -57,7 +58,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	//背景のパーティクル
 	const int staet_particle_num = 200;
 	GameStart gamestart[staet_particle_num];
-
+	StageSelect stage_select;
+	
 	//ゲーム名移動
 	float name_x[8], name_y[8];
 	int name_flag[8];
@@ -192,7 +194,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		}
 
 		//ステージ選択
-		if (scene == 1)
+		else if (scene == 1)
 		{
 			//Aキーの処理
 			if (keys[KEY_INPUT_A] == 1 && oldkeys[KEY_INPUT_A] == 0)
@@ -218,7 +220,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			}
 		}
 		
-		if (scene == 2)
+		else if (scene == 2)
 		{
 			player->update(edgeL, WIN_WIDTH, WIN_HEIGHT, block, item);
 			block->update();
